@@ -124,7 +124,7 @@ jobs:
           cache: pip
 
       - name: Instalar dependencias
-        run: pip install -r requirements.txt pytest
+        run: pip install -r requirements.txt pytest pytest-cov
 
       - name: Ejecutar pruebas de integración
         run: pytest tests/integration --junitxml=integration-results.xml
@@ -180,7 +180,7 @@ jobs:
           # cache: pip
 #
       # - name: Instalar dependencias
-        # run: pip install -r requirements.txt pytest requests gunicorn
+        # run: pip install -r requirements.txt pytest pytest-cov requests gunicorn
 #
       # - name: Levantar la app con Gunicorn
         # run: |
