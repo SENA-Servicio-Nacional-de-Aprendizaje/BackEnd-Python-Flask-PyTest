@@ -1,4 +1,4 @@
-from flask import Blueprint, Response, jsonify, request
+from flask import Blueprint
 
 from src.controllers.users_controller import (
     create_user_controller,

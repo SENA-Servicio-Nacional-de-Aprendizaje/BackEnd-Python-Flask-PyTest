@@ -1,7 +1,3 @@
-from typing import AnyStr
-from unittest.mock import ANY
-
-
 def test_get_user_by_id_returns_200_and_json(client):
     # Arrage: Configuración del caso de prueba
     user_id: int = 2  # ID del usuario que se está probando

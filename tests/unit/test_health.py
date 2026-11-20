@@ -16,7 +16,10 @@ def test_health_checks_return_status_200(client):
 
 
 def test_health_method_not_allowed(client):
-    """Verifica que el endpoint /health solo acepte peticiones GET. Si un método no soportado (POST, PUT, DELETE) es usado, debe retornar un error 405 (Method Not Allowed)"""
+    """
+    Verifica que el endpoint /health solo acepte peticiones GET. Si un método no soportado (POST,
+    PUT, DELETE) es usado, debe retornar un error 405 (Method Not Allowed)
+    """
     # 1. Arrange: Configuración del caso de prueba
     path: str = "/health"  # Ruta del endpoint que se está probando
 

@@ -26,16 +26,20 @@ class User(db.Model):
         inspector = inspect(db.engine)
         if cls.__tablename__ in inspector.get_table_names():
             print(
-                f"\033[94mℹ La tabla '{cls.__tablename__}' ya existe en la base de datos MySQL.\033[0m"
+                f"\033[94mℹ La tabla '{cls.__tablename__}' "
+                "ya existe en la base de datos MySQL.\033[0m"
             )
         else:
             cls.__table__.create(db.engine)
             print(
-                f"\033[92m✔ Tabla '{cls.__tablename__}' creada exitosamente en la base de datos MySQL.\033[0m"
+                f"\033[92m✔ Tabla '{cls.__tablename__}' creada "
+                "exitosamente en la base de datos MySQL.\033[0m"
             )
 
     def to_dict(self):
-        """Método auxiliar para convertir una instancia de User en diccionario serializable a JSON"""
+        """
+        Método auxiliar para convertir una instancia de User en diccionario serializable a JSON
+        """
         return {
             "user_id": self.user_id,
             "username": self.username,

@@ -1,7 +1,6 @@
-from datetime import datetime
 from typing import Any, Dict, Optional
 
-from flask import Flask, jsonify
+from flask import Flask
 
 from src.config.mysql_config import Config, verify_database_connection
 from src.models import db  # Importamos db de SQLAlchemy
@@ -10,7 +9,10 @@ from src.routes.users_routes import users_bp
 
 
 def create_app(test_config: Optional[Dict[str, Any]] = None) -> Flask:
-    """Application Factory (create_app): Refactorizado app.py con inyección de configuración dinámica (test_config)."""
+    """
+    Application Factory (create_app): Refactorizado app.py con inyección de configuración dinámica
+    (test_config).
+    """
 
     # 0. Inicializamos la aplicación Flask
     app = Flask(__name__)
@@ -65,19 +67,23 @@ if __name__ == "__main__":
     # pip install SQLAlchemy pymysql cryptography pytest pytest-cov
 
     # pip3 install -r requirements.txt                  Instala las dependencias del proyecto
-    # pip3 freeze > requirements.txt                     Actualiza el archivo requirements.txt con las dependencias instaladas
+    # pip3 freeze > requirements.txt                     Actualiza el archivo requirements.txt con
+    # las dependencias instaladas
 
     # python -m flask run                               Ejecuta la aplicacion
     # flask --app src.app run --debug                   Ejecuta la aplicacion en modo debug
     # flask --app src.app run --host=[IP_ADDRESS] --port=5000    Ejecuta la aplicacion en modo debug
 
     # pytest --cov=src --cov-report=term-missing        Ejecuta las pruebas con cobertura
-    # pytest --cov=src --cov-report=html                Ejecuta las pruebas con cobertura y genera un reporte HTML
-    # La cobertura de código es una métrica porcentual que indica qué proporción de tus líneas de código fuente fueron efectivamente ejecutadas cuando corriste tu suite de pruebas automáticas.
+    # pytest --cov=src --cov-report=html                Ejecuta las pruebas con cobertura y genera
+    # un reporte HTML
+    # La cobertura de código es una métrica porcentual que indica qué proporción de tus líneas de
+    # código fuente fueron efectivamente ejecutadas cuando corriste tu suite de pruebas automáticas.
 
     # pytest --cov=src --cov-report=term-missing --cov-report=html
     # Ejecuta las pruebas con cobertura y genera un reporte HTML.
     # El reporte HTML se puede encontrar en la carpeta htmlcov
 
     # En Linux:
-    # "xdg-open htmlcov/index.html" o simplemente arrastra el archivo index.html a una pestaña de tu navegador
+    # "xdg-open htmlcov/index.html" o simplemente arrastra el archivo index.html a una pestaña de tu
+    # navegador

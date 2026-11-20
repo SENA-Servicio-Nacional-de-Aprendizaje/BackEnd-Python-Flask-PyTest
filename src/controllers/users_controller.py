@@ -67,7 +67,8 @@ def create_user_controller() -> tuple[Response, int]:
     """
 
     # request.get_json(silent=True) parsea el body a un diccionario de Python.
-    # Con silent=True evita lanzar un error 400 si el cliente no envía JSON válido, devolviendo None.
+    # Con silent=True evita lanzar un error 400 si el cliente no envía JSON válido, devolviendo
+    # None.
     payload = request.get_json(silent=True)
 
     # Validar que llega un JSON válido
@@ -104,7 +105,7 @@ def create_user_controller() -> tuple[Response, int]:
             jsonify(
                 {
                     "success": True,
-                    "msg": f"Usuario creado satisfactoriamente",
+                    "msg": "Usuario creado satisfactoriamente",
                     "data": user.to_dict(),
                 }
             ),
@@ -159,7 +160,8 @@ def update_user_by_id_controller(user_id: int) -> tuple[Response, int]:
     """Actualiza un usuario por su ID (Update)."""
 
     # request.get_json(silent=True) parsea el body a un diccionario de Python.
-    # Con silent=True evita lanzar un error 400 si el cliente no envía JSON válido, devolviendo None.
+    # Con silent=True evita lanzar un error 400 si el cliente no envía JSON válido, devolviendo
+    # None.
     payload = request.get_json(silent=True)
 
     if not isinstance(payload, dict):
