@@ -1,14 +1,15 @@
-from src.routes.users_routes import users_bp
-from flask import Flask, jsonify
+from datetime import datetime
 from typing import Any, Dict, Optional
 
-from datetime import datetime
+from flask import Flask, jsonify
 
-from src.routes.health import health_bp       # Importamos el Blueprint del módulo health
 from src.config.mysql_config import Config, verify_database_connection
-from src.models import db                     # Importamos db de SQLAlchemy
+from src.models import db  # Importamos db de SQLAlchemy
+from src.routes.health import health_bp  # Importamos el Blueprint del módulo health
+from src.routes.users_routes import users_bp
 
-def create_app(test_config: Optional[Dict[str, Any]] = None) -> Flask:  
+
+def create_app(test_config: Optional[Dict[str, Any]] = None) -> Flask:
     """Application Factory (create_app): Refactorizado app.py con inyección de configuración dinámica (test_config)."""
 
     # 0. Inicializamos la aplicación Flask
@@ -30,26 +31,30 @@ def create_app(test_config: Optional[Dict[str, Any]] = None) -> Flask:
     db.init_app(app)
 
     # 4. Registro de rutas / endpoints (módulos tematicos, Blueprints)
-    app.register_blueprint(health_bp)                               # Registramos el Blueprint en la aplicación
-    app.register_blueprint(users_bp, url_prefix='/api/v1/users')    # Registramos el Blueprint en la aplicación
+    app.register_blueprint(health_bp)  # Registramos el Blueprint en la aplicación
+    app.register_blueprint(
+        users_bp, url_prefix="/api/v1/users"
+    )  # Registramos el Blueprint en la aplicación
 
     return app
 
+
 # Arrancamos la aplicación: Punto de entrada para ejecutar el servidor
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Verificamos la conexión a la base de datos antes de iniciar el servidor
     verify_database_connection(Config.SQLALCHEMY_DATABASE_URI)
 
     # Crear la instancia de la aplicación (sin config de prueba)
-    app = create_app()                              
+    app = create_app()
 
     # Crea automáticamente las tablas en MySQL si aún no existen
     with app.app_context():
         from src.models.user_model import User
-        User.create_table()                         # Verifica y crea la tabla 'users' emitiendo mensaje
+
+        User.create_table()  # Verifica y crea la tabla 'users' emitiendo mensaje
 
     # Ejecutamos la aplicación en modo debug
-    app.run(debug=True, port=5000, host='0.0.0.0')  
+    app.run(debug=True, port=5000, host="0.0.0.0")
 
     # Comandos a ejecutar
 
@@ -61,7 +66,7 @@ if __name__ == '__main__':
 
     # pip3 install -r requirements.txt                  Instala las dependencias del proyecto
     # pip3 freeze > requirements.txt                     Actualiza el archivo requirements.txt con las dependencias instaladas
-    
+
     # python -m flask run                               Ejecuta la aplicacion
     # flask --app src.app run --debug                   Ejecuta la aplicacion en modo debug
     # flask --app src.app run --host=[IP_ADDRESS] --port=5000    Ejecuta la aplicacion en modo debug
@@ -74,7 +79,5 @@ if __name__ == '__main__':
     # Ejecuta las pruebas con cobertura y genera un reporte HTML.
     # El reporte HTML se puede encontrar en la carpeta htmlcov
 
-    # En Linux: 
+    # En Linux:
     # "xdg-open htmlcov/index.html" o simplemente arrastra el archivo index.html a una pestaña de tu navegador
-
-

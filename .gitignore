@@ -16,3 +16,9 @@ htmlcov/
 
 # Adicionales
 extras/
+
+instance/
+*.db.coverage
+.pytest_cache/
+coverage.xml
+*-results.xml

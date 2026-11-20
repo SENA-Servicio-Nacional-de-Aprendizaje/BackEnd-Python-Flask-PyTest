@@ -3,6 +3,7 @@
 # mysql+pymysql://root:secret@localhost:3306/mi_api_flask_db
 
 import os
+
 from dotenv import load_dotenv
 
 # Carga las variables definidas en el archivo .env local
@@ -11,6 +12,7 @@ load_dotenv()
 
 class Config:
     """Configuración base de la aplicación."""
+
     SECRET_KEY = os.getenv("SECRET_KEY", "dev_secret_key_default")
 
     # Credenciales de conexión a MySQL
@@ -21,7 +23,7 @@ class Config:
     DB_NAME = os.getenv("DB_NAME", "mi_api_flask_db")
 
     # URI de SQLAlchemy para conectarse a MySQL mediante PyMySQL
-    SQLALCHEMY_DATABASE_URI = (
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL") or (
         f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
 
@@ -40,8 +42,10 @@ def verify_database_connection(uri: str) -> bool:
         # Verificar conexión
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
-            
-        print("\033[92m✔ Conexión a la base de datos MySQL establecida con éxito.\033[0m")
+
+        print(
+            "\033[92m✔ Conexión a la base de datos MySQL establecida con éxito.\033[0m"
+        )
         return True
     except Exception as error:
         print(f"\033[91m✖ Error al conectar con la base de datos MySQL:\033[0m {error}")
