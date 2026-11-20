@@ -13,3 +13,6 @@ htmlcov/
 
 # Variables de entorno
 .env
+
+# Adicionales
+extras/
