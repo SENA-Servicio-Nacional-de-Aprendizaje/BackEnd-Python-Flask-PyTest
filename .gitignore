@@ -13,3 +13,12 @@ htmlcov/
 
 # Variables de entorno
 .env
+
+# Adicionales
+extras/
+
+instance/
+*.db.coverage
+.pytest_cache/
+coverage.xml
+*-results.xml
